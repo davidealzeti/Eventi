@@ -7,8 +7,13 @@
 //
 
 #import "ViewController.h"
+#define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) NSNumber *count;
+
 
 @end
 
@@ -17,11 +22,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setCount:(NSNumber *)count{
+    _count = count;
+    self.label.text = [NSString stringWithFormat:@"Count: %d", self.count.intValue];
 }
+
+- (IBAction)buttonPressed:(UIButton *)sender {
+    self.count = @(self.count.intValue + 1);
+    DEBUGLOG(@"Button pressed");
+}
+
 
 @end
