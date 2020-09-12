@@ -15,6 +15,8 @@
 		E24CF2A2250BDA2100AC6608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CF2A0250BDA2100AC6608 /* LaunchScreen.storyboard */; };
 		E24CF2AD250BDA2100AC6608 /* EventiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E24CF2AC250BDA2100AC6608 /* EventiTests.m */; };
 		E24CF2B8250BDA2100AC6608 /* EventiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E24CF2B7250BDA2100AC6608 /* EventiUITests.m */; };
+		E2C6CC08250D172100498601 /* logo_size_invert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2C6CC07250D172100498601 /* logo_size_invert.jpg */; };
+		E2C6CC0B250D1D3100498601 /* MDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6CC0A250D1D3100498601 /* MDEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		E24CF2B3250BDA2100AC6608 /* EventiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24CF2B7250BDA2100AC6608 /* EventiUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventiUITests.m; sourceTree = "<group>"; };
 		E24CF2B9250BDA2100AC6608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2C6CC07250D172100498601 /* logo_size_invert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo_size_invert.jpg; path = ../../../../Downloads/LogoSize_Apple_icon_ByTailorBrands/logo_size_invert.jpg; sourceTree = "<group>"; };
+		E2C6CC09250D1D3100498601 /* MDEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDEvent.h; path = Model/MDEvent.h; sourceTree = "<group>"; };
+		E2C6CC0A250D1D3100498601 /* MDEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDEvent.m; path = Model/MDEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +106,7 @@
 		E24CF291250BDA2000AC6608 /* Eventi */ = {
 			isa = PBXGroup;
 			children = (
+				E2C6CC0C250D1D5000498601 /* Model */,
 				E24CF295250BDA2000AC6608 /* AppDelegate.h */,
 				E24CF296250BDA2000AC6608 /* AppDelegate.m */,
 				E24CF298250BDA2000AC6608 /* ViewController.h */,
@@ -116,6 +122,7 @@
 		E24CF292250BDA2000AC6608 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E2C6CC07250D172100498601 /* logo_size_invert.jpg */,
 				E24CF29E250BDA2100AC6608 /* Assets.xcassets */,
 				E24CF293250BDA2000AC6608 /* main.m */,
 			);
@@ -138,6 +145,15 @@
 				E24CF2B9250BDA2100AC6608 /* Info.plist */,
 			);
 			path = EventiUITests;
+			sourceTree = "<group>";
+		};
+		E2C6CC0C250D1D5000498601 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2C6CC09250D1D3100498601 /* MDEvent.h */,
+				E2C6CC0A250D1D3100498601 /* MDEvent.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2C6CC08250D172100498601 /* logo_size_invert.jpg in Resources */,
 				E24CF2A2250BDA2100AC6608 /* LaunchScreen.storyboard in Resources */,
 				E24CF29F250BDA2100AC6608 /* Assets.xcassets in Resources */,
 				E24CF29D250BDA2100AC6608 /* Main.storyboard in Resources */,
@@ -273,6 +290,7 @@
 				E24CF29A250BDA2000AC6608 /* ViewController.m in Sources */,
 				E24CF297250BDA2000AC6608 /* AppDelegate.m in Sources */,
 				E24CF294250BDA2000AC6608 /* main.m in Sources */,
+				E2C6CC0B250D1D3100498601 /* MDEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +516,7 @@
 				E24CF2BE250BDA2100AC6608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E24CF2BF250BDA2100AC6608 /* Build configuration list for PBXNativeTarget "EventiTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +525,7 @@
 				E24CF2C1250BDA2100AC6608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E24CF2C2250BDA2100AC6608 /* Build configuration list for PBXNativeTarget "EventiUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +534,7 @@
 				E24CF2C4250BDA2100AC6608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

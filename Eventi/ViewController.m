@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MDEvent.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 
 @interface ViewController ()
@@ -22,7 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    MDEvent *event = [[MDEvent alloc] init];
+    [event print];
 }
 
 - (void)setCount:(NSNumber *)count{
