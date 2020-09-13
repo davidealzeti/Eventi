@@ -10,11 +10,17 @@
 #import "MDEvent.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 
-@interface ViewController ()
+@interface ViewController () <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (strong, nonatomic) NSNumber *count;
+@property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *dueDate;
+
+- (void)registerForKeyboardNotifications;
+- (void)unregisterForKeyboardNotifications;
+- (void)keyboardWasShown:(NSNotification *)aNotification;
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification;
+- (void)dismissKeyboard;
 
 @end
 
@@ -22,20 +28,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    MDEvent *event = [[MDEvent alloc] init];
-    [event print];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
-- (void)setCount:(NSNumber *)count{
-    _count = count;
-    self.label.text = [NSString stringWithFormat:@"Count: %d", self.count.intValue];
+- (void)registerForKeyboardNotifications{
+    DEBUGLOG(@"Registering for keyboard notifications");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (IBAction)buttonPressed:(UIButton *)sender {
-    self.count = @(self.count.intValue + 1);
-    DEBUGLOG(@"Button pressed");
+- (void)unregisterForKeyboardNotifications{
+    DEBUGLOG(@"Unregistering for keyboard notifications");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+
+
+- (void)keyboardWasShown:(NSNotification *)aNotification{
+    DEBUGLOG(@"Keyboard shown");
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    DEBUGLOG(@"Keyboard hidden");
+}
+
+- (void)dismissKeyboard{
+    [_eventNameTextField resignFirstResponder];
+    DEBUGLOG(@"Keyboard dismissed");
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self registerForKeyboardNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [self unregisterForKeyboardNotifications];
+}
+
 
 
 @end
