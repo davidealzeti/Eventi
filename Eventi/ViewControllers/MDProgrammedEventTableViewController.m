@@ -7,14 +7,18 @@
 //
 
 #import "MDProgrammedEventTableViewController.h"
+#import "CreateEventViewController.h"
+#import "MDEvent.h"
+#define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
-#define ROWS_NUM 1
 
-@interface MDProgrammedEventTableViewController ()
+@interface MDProgrammedEventTableViewController () <MDNewEventProtocol>
 
 @end
 
 @implementation MDProgrammedEventTableViewController
+
+@synthesize programmedEvents = _programmedEvents;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,9 +28,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
-
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -35,14 +38,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return ROWS_NUM;
+    return self.programmedEvents.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProgrammedEventCell" forIndexPath:indexPath];
     
+    DEBUGLOG(@"Cell configuration started");
+    
     // Configure the cell...
+    if ([self.programmedEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
+        MDEvent *programmedEvent = [self.programmedEvents[indexPath.row] copy];
+        
+        cell.textLabel.text = programmedEvent.name;
+    }
     
     return cell;
 }
@@ -82,14 +92,23 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"createNewEventSegue"]) {
+        CreateEventViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
-*/
+
+
+- (void)sendNewEvent:(MDEvent *)event{
+    DEBUGLOG(@"New event added to events list");
+    [self.programmedEvents addObject:event];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"events size: %d", self.programmedEvents.count);
+}
 
 @end

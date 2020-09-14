@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15G22010" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bFK-bp-ZIq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15G22010" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qpz-K2-DLn">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Eventi Programmati-->
@@ -10,12 +11,15 @@
             <objects>
                 <tableViewController id="Bhm-Yt-O2P" customClass="MDProgrammedEventTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Y3o-sS-HEu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgrammedEventCell" id="QFu-fz-JSK">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QFu-fz-JSK" id="EOr-ou-FQ5">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -29,26 +33,187 @@
                         <barButtonItem key="backBarButtonItem" title="Indietro" id="QaR-Zb-9pP"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ren-2V-DhE">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="MBs-bM-Jjr"/>
+                                <segue destination="mDZ-fe-Q0r" kind="show" identifier="createNewEventSegue" id="1cJ-ln-nUF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yvi-vD-fya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2310" y="-246"/>
+            <point key="canvasLocation" x="4146" y="-246"/>
+        </scene>
+        <!--Nuovo Evento-->
+        <scene sceneID="YGa-aW-vi5">
+            <objects>
+                <viewController id="mDZ-fe-Q0r" customClass="CreateEventViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T5t-aS-xVb"/>
+                        <viewControllerLayoutGuide type="bottom" id="eWk-20-a2v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8OQ-6F-e3F">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZaO-bo-fVI">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="UGI-oP-ODR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="UGI-oP-ODR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="UGI-oP-ODR"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHL-XD-qNO">
+                                <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categoria:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDZ-Zm-pcy">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Mjn-8r-FmM"/>
+                                    <constraint firstAttribute="width" constant="105" id="eS9-RJ-KdR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Mjn-8r-FmM"/>
+                                        <exclude reference="eS9-RJ-KdR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Mjn-8r-FmM"/>
+                                        <include reference="eS9-RJ-KdR"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBy-0G-cAj">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.41992561626377822" green="1" blue="0.73683947379434689" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.077895819304641845" green="0.048749205277278537" blue="0.26122791230366493" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Fatto"/>
+                                <connections>
+                                    <action selector="createNewEvent:" destination="mDZ-fe-Q0r" eventType="touchUpInside" id="HWa-Py-fMR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="centerX" secondItem="8OQ-6F-e3F" secondAttribute="centerX" id="2Sd-QO-THQ">
+                                <variation key="widthClass=compact" constant="60.5"/>
+                            </constraint>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="top" secondItem="ZaO-bo-fVI" secondAttribute="bottom" constant="37" id="Fk6-cK-LTf">
+                                <variation key="widthClass=compact" constant="15"/>
+                            </constraint>
+                            <constraint firstItem="nDZ-Zm-pcy" firstAttribute="top" secondItem="8OQ-6F-e3F" secondAttribute="top" constant="126" id="GBi-H5-62g">
+                                <variation key="widthClass=compact" constant="155"/>
+                            </constraint>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="leading" secondItem="nDZ-Zm-pcy" secondAttribute="trailing" constant="16" id="Jik-aS-7Oz"/>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="leading" secondItem="nDZ-Zm-pcy" secondAttribute="trailing" constant="3" id="Ra2-0U-tJu"/>
+                            <constraint firstItem="eWk-20-a2v" firstAttribute="top" secondItem="dBy-0G-cAj" secondAttribute="bottom" constant="65" id="T8l-KK-SbB">
+                                <variation key="widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="dBy-0G-cAj" firstAttribute="trailing" secondItem="pHL-XD-qNO" secondAttribute="trailing" id="Uzz-iS-FTU"/>
+                            <constraint firstItem="dBy-0G-cAj" firstAttribute="leading" secondItem="nDZ-Zm-pcy" secondAttribute="leading" id="Vxn-tx-8Sj"/>
+                            <constraint firstItem="nDZ-Zm-pcy" firstAttribute="top" secondItem="ZaO-bo-fVI" secondAttribute="bottom" constant="8" symbolic="YES" id="aXm-om-k26">
+                                <variation key="widthClass=compact" constant="37"/>
+                            </constraint>
+                            <constraint firstItem="ZaO-bo-fVI" firstAttribute="centerX" secondItem="8OQ-6F-e3F" secondAttribute="centerX" id="cit-aG-ndK"/>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="centerX" secondItem="ZaO-bo-fVI" secondAttribute="centerX" id="gIq-U6-cJV"/>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="centerY" secondItem="nDZ-Zm-pcy" secondAttribute="centerY" id="neJ-7d-DQd"/>
+                            <constraint firstItem="nDZ-Zm-pcy" firstAttribute="leading" secondItem="ZaO-bo-fVI" secondAttribute="leading" id="ok4-5g-Fim"/>
+                            <constraint firstItem="nDZ-Zm-pcy" firstAttribute="leading" secondItem="8OQ-6F-e3F" secondAttribute="leadingMargin" id="vx0-VI-cSc"/>
+                            <constraint firstItem="pHL-XD-qNO" firstAttribute="centerX" secondItem="ZaO-bo-fVI" secondAttribute="centerX" id="y3O-gv-ECy">
+                                <variation key="widthClass=compact" constant="60.5"/>
+                            </constraint>
+                            <constraint firstItem="ZaO-bo-fVI" firstAttribute="top" secondItem="T5t-aS-xVb" secondAttribute="bottom" constant="81" id="zWX-cO-Eax"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ZaO-bo-fVI"/>
+                                <exclude reference="pHL-XD-qNO"/>
+                                <exclude reference="nDZ-Zm-pcy"/>
+                                <exclude reference="dBy-0G-cAj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="cit-aG-ndK"/>
+                                <exclude reference="zWX-cO-Eax"/>
+                                <exclude reference="GBi-H5-62g"/>
+                                <exclude reference="aXm-om-k26"/>
+                                <exclude reference="ok4-5g-Fim"/>
+                                <exclude reference="vx0-VI-cSc"/>
+                                <exclude reference="2Sd-QO-THQ"/>
+                                <exclude reference="Fk6-cK-LTf"/>
+                                <exclude reference="Jik-aS-7Oz"/>
+                                <exclude reference="Ra2-0U-tJu"/>
+                                <exclude reference="gIq-U6-cJV"/>
+                                <exclude reference="neJ-7d-DQd"/>
+                                <exclude reference="y3O-gv-ECy"/>
+                                <exclude reference="Uzz-iS-FTU"/>
+                                <exclude reference="Vxn-tx-8Sj"/>
+                                <exclude reference="T8l-KK-SbB"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="ZaO-bo-fVI"/>
+                                <include reference="pHL-XD-qNO"/>
+                                <include reference="nDZ-Zm-pcy"/>
+                                <include reference="dBy-0G-cAj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="cit-aG-ndK"/>
+                                <exclude reference="zWX-cO-Eax"/>
+                                <include reference="GBi-H5-62g"/>
+                                <include reference="aXm-om-k26"/>
+                                <include reference="ok4-5g-Fim"/>
+                                <include reference="vx0-VI-cSc"/>
+                                <include reference="2Sd-QO-THQ"/>
+                                <include reference="Fk6-cK-LTf"/>
+                                <include reference="Jik-aS-7Oz"/>
+                                <exclude reference="Ra2-0U-tJu"/>
+                                <exclude reference="gIq-U6-cJV"/>
+                                <include reference="neJ-7d-DQd"/>
+                                <include reference="y3O-gv-ECy"/>
+                                <include reference="Uzz-iS-FTU"/>
+                                <include reference="Vxn-tx-8Sj"/>
+                                <include reference="T8l-KK-SbB"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Nuovo Evento" id="ULb-FX-4mn"/>
+                    <connections>
+                        <outlet property="categoryPicker" destination="pHL-XD-qNO" id="jyD-ml-scN"/>
+                        <outlet property="eventNameTextField" destination="ZaO-bo-fVI" id="m3g-7K-Umn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXS-TW-eEu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5286" y="-246"/>
         </scene>
         <!--Eventi Passati-->
         <scene sceneID="W2E-gD-l7O">
             <objects>
                 <tableViewController id="ha7-6T-1BQ" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="reN-JR-gl3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PastEventCell" id="aNB-AN-Iql">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aNB-AN-Iql" id="i4N-BF-yrW">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -64,152 +229,63 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gk-16-33e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2346" y="426"/>
+            <point key="canvasLocation" x="3228" y="678"/>
         </scene>
-        <!--Passati-->
-        <scene sceneID="30c-TV-3z1">
+        <!--EventiProgrammatiNavigationController-->
+        <scene sceneID="GlI-2G-cnN">
             <objects>
-                <navigationController id="JN4-XW-mIt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Passati" image="history.png" id="3t6-1u-0B1"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5ri-De-d7o">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ha7-6T-1BQ" kind="relationship" relationship="rootViewController" id="5KX-YW-ggl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vUb-Lr-QC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1152" y="678"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsZ-oU-Qpv">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="IeH-SW-bci"/>
-                                    <constraint firstAttribute="height" constant="30" id="TFz-sZ-jqa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" keyboardAppearance="light"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="IeH-SW-bci"/>
-                                        <exclude reference="TFz-sZ-jqa"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                    <mask key="constraints">
-                                        <include reference="IeH-SW-bci"/>
-                                        <include reference="TFz-sZ-jqa"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="j9M-UF-U96">
-                                <rect key="frame" x="-160" y="-108" width="320" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="621706294.38634503">
-                                    <!--2020-09-13 16:11:34 +0000-->
-                                </date>
-                                <locale key="locale" localeIdentifier="it"/>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="hsZ-oU-Qpv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="74" id="3Lh-HH-1NO"/>
-                            <constraint firstItem="j9M-UF-U96" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ele-Vd-ngE"/>
-                            <constraint firstItem="hsZ-oU-Qpv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g78-hZ-7XX"/>
-                            <constraint firstItem="hsZ-oU-Qpv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="74" id="lYr-p6-Mff"/>
-                            <constraint firstItem="j9M-UF-U96" firstAttribute="top" secondItem="hsZ-oU-Qpv" secondAttribute="bottom" constant="16" id="sbB-6C-IRa"/>
-                            <constraint firstItem="hsZ-oU-Qpv" firstAttribute="centerX" secondItem="j9M-UF-U96" secondAttribute="centerX" id="ydy-hr-tX1"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="hsZ-oU-Qpv"/>
-                                <exclude reference="j9M-UF-U96"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="ele-Vd-ngE"/>
-                                <exclude reference="sbB-6C-IRa"/>
-                                <exclude reference="3Lh-HH-1NO"/>
-                                <exclude reference="g78-hZ-7XX"/>
-                                <exclude reference="ydy-hr-tX1"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="hsZ-oU-Qpv"/>
-                                <include reference="j9M-UF-U96"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="ele-Vd-ngE"/>
-                                <include reference="sbB-6C-IRa"/>
-                                <include reference="3Lh-HH-1NO"/>
-                                <include reference="g78-hZ-7XX"/>
-                                <exclude reference="lYr-p6-Mff"/>
-                                <include reference="ydy-hr-tX1"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="dueDate" destination="j9M-UF-U96" id="ow2-ca-9iO"/>
-                        <outlet property="eventNameTextField" destination="hsZ-oU-Qpv" id="mqZ-1s-MHO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3477" y="-691"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="8Um-cS-lak">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bFK-bp-ZIq" sceneMemberID="viewController">
+                <navigationController title="EventiProgrammatiNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="G01-YY-oCh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Programmati" image="hourglass.png" id="dTp-lk-tjs"/>
                     <toolbarItems/>
-                    <keyCommands>
-                        <keyCommand/>
-                    </keyCommands>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="BG5-Qb-rGk">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="tWw-gI-r1e" kind="relationship" relationship="viewControllers" id="MC7-1g-ojm"/>
-                        <segue destination="JN4-XW-mIt" kind="relationship" relationship="viewControllers" id="gVG-3u-zZZ"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GGr-N3-U7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="474" y="-246"/>
-        </scene>
-        <!--Programmati-->
-        <scene sceneID="zBD-Ec-IzK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tWw-gI-r1e" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Programmati" image="hourglass.png" id="Axz-Oy-gky"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2oO-So-kTY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bAJ-D6-Kiw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Bhm-Yt-O2P" kind="relationship" relationship="rootViewController" id="Uz9-bV-Cnc"/>
+                        <segue destination="Bhm-Yt-O2P" kind="relationship" relationship="rootViewController" id="rYd-WS-28M"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YMx-nk-FAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y5o-YH-qbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1392" y="-246"/>
+            <point key="canvasLocation" x="3228" y="-246"/>
+        </scene>
+        <!--EventiPassatiNavigationController-->
+        <scene sceneID="DDK-9A-ymd">
+            <objects>
+                <navigationController title="EventiPassatiNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="cPA-oj-pIg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Passati" image="history.png" id="TtR-fT-xSp"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TYg-qn-ZXh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ha7-6T-1BQ" kind="relationship" relationship="rootViewController" id="V3Y-9Q-CpW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhr-tU-69o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2310" y="678"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="dB9-2i-kTR">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Qpz-K2-DLn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Ay2-bN-Rvx">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="G01-YY-oCh" kind="relationship" relationship="viewControllers" id="rSI-0P-Ozk"/>
+                        <segue destination="cPA-oj-pIg" kind="relationship" relationship="viewControllers" id="YkY-BB-OKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ugi-1N-FWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2310" y="-246"/>
         </scene>
     </scenes>
     <resources>

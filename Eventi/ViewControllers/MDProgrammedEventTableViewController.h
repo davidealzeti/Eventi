@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MDProgrammedEventTableViewController : UITableViewController
+@interface MDProgrammedEventTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *programmedEvents;
 
 @end
