@@ -29,6 +29,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.programmedEvents = [[NSMutableArray alloc] init];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -49,7 +51,7 @@
     
     // Configure the cell...
     if ([self.programmedEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
-        MDEvent *programmedEvent = [self.programmedEvents[indexPath.row] copy];
+        MDEvent *programmedEvent = self.programmedEvents[indexPath.row];
         
         cell.textLabel.text = programmedEvent.name;
     }
@@ -104,7 +106,9 @@
 
 - (void)sendNewEvent:(MDEvent *)event{
     DEBUGLOG(@"New event added to events list");
+    [event print];
     [self.programmedEvents addObject:event];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

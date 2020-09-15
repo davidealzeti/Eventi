@@ -15,13 +15,15 @@
 @property (strong, nonatomic, readonly) NSDate *creationDate;
 @property (strong, nonatomic) NSDate *dueDate;
 @property (strong, nonatomic) NSString *notes;
+@property BOOL isNotificationActive;
 
 - (instancetype)init;
 - (instancetype)initWithName:(NSString *)name
           belongsToCategory:(NSString *)category
                wasCreatedOn:(NSDate *)creationDate
                     isDueTo:(NSDate *)dueDate
-         additionalNotes:(NSString *)notes;
+         additionalNotes:(NSString *)notes
+             getNotification:(BOOL)beNotified;
 - (void)print;
 
 

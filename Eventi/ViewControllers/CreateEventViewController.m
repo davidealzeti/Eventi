@@ -14,8 +14,19 @@
 
 @interface CreateEventViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIScrollView *createEventScrollView;
+
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *dueDatePicker;
+@property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+
+@property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *createEventButton;
+
+
 
 @property (strong, nonatomic) NSArray *categories;
 
@@ -25,7 +36,7 @@
 
 @implementation CreateEventViewController
 
-@synthesize delegate, createdEvent;
+@synthesize delegate, createdEvent, createEventScrollView;
 
 
 - (void)viewDidLoad {
@@ -76,20 +87,17 @@
 -(void)dismissKeyboard{
     DEBUGLOG(@"Keyboard dismissed by clicking away");
     [self.eventNameTextField resignFirstResponder];
+    [self.notesTextView resignFirstResponder];
 }
 
 
 - (IBAction)createNewEvent:(id)sender {
     DEBUGLOG(@"Button pressed: new event created");
-    createdEvent = [[MDEvent alloc] initWithName:self.eventNameTextField.text belongsToCategory:[self.categories objectAtIndex:[self.categoryPicker selectedRowInComponent:0]] wasCreatedOn:[NSDate date] isDueTo:[NSDate date] additionalNotes:@""];
+    createdEvent = [[MDEvent alloc] initWithName:self.eventNameTextField.text belongsToCategory:[self.categories objectAtIndex:[self.categoryPicker selectedRowInComponent:0]] wasCreatedOn:[NSDate date] isDueTo:[self.dueDatePicker date] additionalNotes:self.notesTextView.text getNotification:[self.notificationSwitch isOn]];
+    
+    [self.delegate sendNewEvent:createdEvent];
     
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated{
-    DEBUGLOG(@"viewWillDisappear called");
-    [self.delegate sendNewEvent:createdEvent];
 }
 
 @end

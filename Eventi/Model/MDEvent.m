@@ -21,17 +21,20 @@
 @synthesize creationDate = _creationDate;
 @synthesize dueDate = _dueDate;
 @synthesize notes = _notes;
+@synthesize isNotificationActive = _isNotificationActive;
 
 - (instancetype)initWithName:(NSString *)name
            belongsToCategory:(NSString *)category wasCreatedOn:(NSDate *)creationDate
                      isDueTo:(NSDate *)dueDate
-             additionalNotes:(NSString *)notes{
+             additionalNotes:(NSString *)notes
+             getNotification:(BOOL)beNotified{
     if (self = [super init]) {
         _name = name;
         _category = category;
         _creationDate = creationDate;
         _dueDate = dueDate;
         _notes = notes;
+        _isNotificationActive = beNotified;
     }
     return self;
 }
@@ -41,11 +44,12 @@
             belongsToCategory:@""
                  wasCreatedOn:[NSDate date]
                       isDueTo:[NSDate date]
-              additionalNotes:@""];
+              additionalNotes:@""
+              getNotification:NO];
 }
 
 - (void)print{
-    NSLog(@"Name: %@ Category: %@ \nCreation: %@ \nDueDate: %@", _name, _category, _creationDate, _dueDate);
+    NSLog(@"Name: %@ Category: %@ \nCreation: %@ \nDueDate: %@ \nGet Notification: %d \nNotes: %@", _name, _category, _creationDate, _dueDate, _isNotificationActive, _notes);
 }
 
 @end
