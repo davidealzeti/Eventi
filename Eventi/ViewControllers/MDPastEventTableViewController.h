@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MDEvent.h"
+#import "MDProgrammedEventViewController.h"
 
-@interface MDPastEventTableViewController : UITableViewController
+@interface MDPastEventTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *pastEvents;
 
 @end

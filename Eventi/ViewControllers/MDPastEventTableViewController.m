@@ -7,14 +7,17 @@
 //
 
 #import "MDPastEventTableViewController.h"
+#define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
 #define ROWS_NUM 1
 
-@interface MDPastEventTableViewController ()
+@interface MDPastEventTableViewController () <MDPastEventProtocol>
 
 @end
 
 @implementation MDPastEventTableViewController
+
+@synthesize pastEvents;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,14 +27,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.pastEvents = [[NSMutableArray alloc] init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -40,7 +39,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return ROWS_NUM;
+    return self.pastEvents.count;
 }
 
 
@@ -48,6 +47,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PastEventCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    if ([self.pastEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
+        MDEvent *pastEvent = self.pastEvents[indexPath.row];
+        
+        cell.textLabel.text = pastEvent.name;
+    }
     
     return cell;
 }
@@ -87,14 +91,26 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+#warning qui va implementata una segue per impostare self come delegate per passare l'evento da impostare come passato; occorre anche eliminare l'evento da quelli programmati
 }
-*/
+
+
+- (void)sendPastEvent:(MDEvent *)event{
+    DEBUGLOG(@"New event added to events list");
+    [event print];
+    [self.pastEvents addObject:event];
+    [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"events size: %d", self.pastEvents.count);
+}
 
 @end

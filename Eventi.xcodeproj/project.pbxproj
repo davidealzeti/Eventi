@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20D0D2425111F15006384A2 /* MDProgrammedEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D0D2325111F15006384A2 /* MDProgrammedEventViewController.m */; };
 		E217BA75250E58CF003FC61E /* MDProgrammedEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E217BA74250E58CF003FC61E /* MDProgrammedEventTableViewController.m */; };
 		E217BA82250E7309003FC61E /* hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = E217BA81250E7309003FC61E /* hourglass.png */; };
 		E217BA84250E75DA003FC61E /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = E217BA83250E75DA003FC61E /* history.png */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E20D0D2225111F15006384A2 /* MDProgrammedEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDProgrammedEventViewController.h; path = ViewControllers/MDProgrammedEventViewController.h; sourceTree = "<group>"; };
+		E20D0D2325111F15006384A2 /* MDProgrammedEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDProgrammedEventViewController.m; path = ViewControllers/MDProgrammedEventViewController.m; sourceTree = "<group>"; };
 		E217BA73250E58CF003FC61E /* MDProgrammedEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDProgrammedEventTableViewController.h; path = ViewControllers/MDProgrammedEventTableViewController.h; sourceTree = "<group>"; };
 		E217BA74250E58CF003FC61E /* MDProgrammedEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDProgrammedEventTableViewController.m; path = ViewControllers/MDProgrammedEventTableViewController.m; sourceTree = "<group>"; };
 		E217BA81250E7309003FC61E /* hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hourglass.png; path = ../../../../Downloads/hourglass.png; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 				E217BA74250E58CF003FC61E /* MDProgrammedEventTableViewController.m */,
 				E2DE185F250F6A62001D13B2 /* CreateEventViewController.h */,
 				E2DE1860250F6A62001D13B2 /* CreateEventViewController.m */,
+				E20D0D2225111F15006384A2 /* MDProgrammedEventViewController.h */,
+				E20D0D2325111F15006384A2 /* MDProgrammedEventViewController.m */,
 			);
 			name = VIewControllers;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				E24CF294250BDA2000AC6608 /* main.m in Sources */,
 				E217BA87250E7633003FC61E /* MDPastEventTableViewController.m in Sources */,
 				E2C6CC0B250D1D3100498601 /* MDEvent.m in Sources */,
+				E20D0D2425111F15006384A2 /* MDProgrammedEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

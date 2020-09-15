@@ -8,6 +8,7 @@
 
 #import "MDProgrammedEventTableViewController.h"
 #import "CreateEventViewController.h"
+#import "MDProgrammedEventViewController.h"
 #import "MDEvent.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
@@ -98,8 +99,20 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"createNewEventSegue"]) {
+        DEBUGLOG(@"Create new event segue");
         CreateEventViewController *vc = segue.destinationViewController;
         vc.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"showProgrammedEventSegue"]){
+        
+        DEBUGLOG(@"Show programmed event segue");
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        MDProgrammedEventViewController *vc = segue.destinationViewController;
+        if ([self.programmedEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
+            vc.programmedEvent = (MDEvent *)self.programmedEvents[indexPath.row];
+        }
     }
 }
 
