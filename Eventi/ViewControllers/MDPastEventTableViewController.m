@@ -45,13 +45,23 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PastEventCell" forIndexPath:indexPath];
+    CustomTableViewCell *cell = (CustomTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PastEventCell"];
     
     // Configure the cell...
     if ([self.pastEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
+        
         MDEvent *pastEvent = self.pastEvents[indexPath.row];
         
-        cell.textLabel.text = pastEvent.name;
+        cell.nameLabel.textColor = [UIColor redColor];
+        
+        cell.nameLabel.text = pastEvent.name;
+        cell.categoryLabel.text = pastEvent.category;
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:pastEvent.dueDate];
+        
+        cell.dueDateLabel.text = [NSString stringWithFormat:@"%d/%d/%d", [components day], [components month], [components year]];
+        
+        NSLog(@"Data: %@",pastEvent.dueDate);
     }
     
     return cell;

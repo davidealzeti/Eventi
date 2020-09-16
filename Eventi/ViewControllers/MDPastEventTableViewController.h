@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MDEvent.h"
 #import "MDProgrammedEventViewController.h"
+#import "CustomTableViewCell.h"
 
 @interface MDPastEventTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 

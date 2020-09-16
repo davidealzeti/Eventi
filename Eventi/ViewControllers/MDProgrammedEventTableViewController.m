@@ -8,6 +8,7 @@
 
 #import "MDProgrammedEventTableViewController.h"
 #import "CreateEventViewController.h"
+#import "CustomTableViewCell.h"
 #import "MDProgrammedEventViewController.h"
 #import "MDPastEventTableViewController.h"
 #import "MDEvent.h"
@@ -50,7 +51,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProgrammedEventCell" forIndexPath:indexPath];
+    CustomTableViewCell *cell = (CustomTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ProgrammedEventCell"];
     
     DEBUGLOG(@"Cell configuration started");
     
@@ -58,7 +59,14 @@
     if ([self.programmedEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
         MDEvent *programmedEvent = self.programmedEvents[indexPath.row];
         
-        cell.textLabel.text = programmedEvent.name;
+        cell.nameLabel.textColor = [UIColor redColor];
+        
+        cell.nameLabel.text = programmedEvent.name;
+        cell.categoryLabel.text = programmedEvent.category;
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:programmedEvent.dueDate];
+        
+        cell.dueDateLabel.text = [NSString stringWithFormat:@"%d/%d/%d", [components day], [components month], [components year]];
     }
     
     return cell;
