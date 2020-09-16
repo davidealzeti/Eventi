@@ -14,8 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *showProgrammedEventScrollView;
 
-
-
 - (void)setupLabels;
 
 @end
@@ -54,9 +52,11 @@
 }
 
 - (IBAction)createPastEvent:(id)sender {
-    DEBUGLOG(@"Button pressed: new event created");
+    DEBUGLOG(@"Button pressed: past event created");
     
-    [self.delegate sendPastEvent:programmedEvent];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendingPastEvent" object:self.programmedEvent];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"removingProgrammedEvent" object:self.programmedEvent.name];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

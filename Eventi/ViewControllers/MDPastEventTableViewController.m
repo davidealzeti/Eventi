@@ -9,9 +9,8 @@
 #import "MDPastEventTableViewController.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
-#define ROWS_NUM 1
 
-@interface MDPastEventTableViewController () <MDPastEventProtocol>
+@interface MDPastEventTableViewController ()
 
 @end
 
@@ -29,6 +28,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.pastEvents = [[NSMutableArray alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPastEvent:) name:@"sendingPastEvent" object:nil];
 }
 
 
@@ -97,20 +98,22 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-#warning qui va implementata una segue per impostare self come delegate per passare l'evento da impostare come passato; occorre anche eliminare l'evento da quelli programmati
 }
 
 
-- (void)sendPastEvent:(MDEvent *)event{
-    DEBUGLOG(@"New event added to events list");
-    [event print];
-    [self.pastEvents addObject:event];
-    [self.tableView reloadData];
+- (void)sendPastEvent:(NSNotification *)notification{
+    NSLog(@"Received notification: %@", notification.name);
+    if ([notification.object isKindOfClass:[MDEvent class]]) {
+        DEBUGLOG(@"Past event added to events list");
+        MDEvent *event = notification.object;
+        [event print];
+        [self.pastEvents addObject:event];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"events size: %d", self.pastEvents.count);
+    NSLog(@"past events size: %d", self.pastEvents.count);
 }
 
 @end

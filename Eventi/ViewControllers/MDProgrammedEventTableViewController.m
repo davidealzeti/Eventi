@@ -9,6 +9,7 @@
 #import "MDProgrammedEventTableViewController.h"
 #import "CreateEventViewController.h"
 #import "MDProgrammedEventViewController.h"
+#import "MDPastEventTableViewController.h"
 #import "MDEvent.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
@@ -32,6 +33,8 @@
     
     self.programmedEvents = [[NSMutableArray alloc] init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEvent:) name:@"removingProgrammedEvent" object:nil];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -46,6 +49,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProgrammedEventCell" forIndexPath:indexPath];
     
     DEBUGLOG(@"Cell configuration started");
@@ -121,6 +125,51 @@
     DEBUGLOG(@"New event added to events list");
     [event print];
     [self.programmedEvents addObject:event];
+    [self.tableView reloadData];
+}
+
+- (void)removeEvent:(NSNotification *)notification{
+    for (MDEvent *event in self.programmedEvents) {
+        if ([event.name isEqualToString:notification.object]) {
+            [self.programmedEvents removeObject:event];
+            [self.tableView reloadData];
+        }
+    }
+}
+
+- (void)sortEventsByDueDate{
+    [self.programmedEvents sortUsingComparator:^(MDEvent *event1, MDEvent *event2){
+        if ([event1.dueDate compare:event2.dueDate]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        else return (NSComparisonResult)NSOrderedAscending;
+    }];
+    
+    [self.tableView reloadData];
+}
+
+- (void)sortEventsByCreationDate{
+    [self.programmedEvents sortUsingComparator:^(MDEvent *event1, MDEvent *event2){
+        if ([event1.creationDate compare:event2.creationDate]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        else return (NSComparisonResult)NSOrderedAscending;
+    }];
+    
+    [self.tableView reloadData];
+}
+
+- (void)sortEventsByCategory{
+    [self.programmedEvents sortUsingComparator:^(MDEvent *event1, MDEvent *event2){
+        if ([event1.category compare:event2.category]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        else if ([event2.category compare:event1.category]){
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        else return (NSComparisonResult)NSOrderedSame;
+    }];
+    
     [self.tableView reloadData];
 }
 

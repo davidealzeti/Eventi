@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) NSMutableArray *pastEvents;
 
+- (void)sendPastEvent:(NSNotification *)notification;
+
 @end
