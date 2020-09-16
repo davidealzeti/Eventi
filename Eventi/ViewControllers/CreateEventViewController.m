@@ -14,6 +14,8 @@
 
 @interface CreateEventViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (strong, nonatomic) NSUserDefaults *defaults;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *createEventScrollView;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
@@ -45,6 +47,7 @@
     
     [self addTapGesture];
     [self setupCategories];
+    [self setupNotifications];
 
 }
 
@@ -95,9 +98,34 @@
     DEBUGLOG(@"Button pressed: new event created");
     createdEvent = [[MDEvent alloc] initWithName:self.eventNameTextField.text belongsToCategory:[self.categories objectAtIndex:[self.categoryPicker selectedRowInComponent:0]] wasCreatedOn:[NSDate date] isDueTo:[self.dueDatePicker date] additionalNotes:self.notesTextView.text getNotification:[self.notificationSwitch isOn]];
     
+    if (createdEvent.isNotificationActive) {
+        [self programNotification:createdEvent.dueDate withName:createdEvent.name];
+    }
+    
     [self.delegate sendNewEvent:createdEvent];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setupNotifications{
+    self.defaults = [NSUserDefaults standardUserDefaults];
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *customSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:customSettings];
+}
+
+- (void)programNotification:(NSDate *)dueTo withName:(NSString *)name{
+    [self.defaults setBool:YES forKey:@"notificationIsActive"];
+    [self.defaults synchronize];
+    
+    if([[NSDate date] compare:dueTo]){
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        NSTimeInterval interval = 60 * 60 * 24 -15;
+        localNotification.fireDate = [dueTo dateByAddingTimeInterval:-interval];
+        localNotification.alertBody = [[NSString alloc] initWithFormat:@"Il tuo Evento: %@ è programmato per domani.",name];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    }
 }
 
 @end
