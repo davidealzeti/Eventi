@@ -12,10 +12,13 @@
 #import "MDProgrammedEventViewController.h"
 #import "MDPastEventTableViewController.h"
 #import "MDEvent.h"
+#import "MDFileManager.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
 
 @interface MDProgrammedEventTableViewController () <MDNewEventProtocol>
+
+@property (strong, nonatomic) MDFileManager *fm;
 
 @end
 
@@ -32,9 +35,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.programmedEvents = [[NSMutableArray alloc] init];
+    self.fm = [[MDFileManager alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEvent:) name:@"removingProgrammedEvent" object:nil];
+    
+    [self loadProgrammedEvent];
     
 }
 
@@ -114,6 +119,8 @@
         DEBUGLOG(@"Create new event segue");
         CreateEventViewController *vc = segue.destinationViewController;
         vc.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateProgrammed" object:self.programmedEvents];
     }
     else if ([segue.identifier isEqualToString:@"showProgrammedEventSegue"]){
         
@@ -129,20 +136,26 @@
 }
 
 
+- (void)loadProgrammedEvent{
+    self.programmedEvents = [[NSMutableArray alloc] initWithArray:[self.fm loadProgrammedEvents]];
+    
+    [self.tableView reloadData];
+}
+
 - (void)sendNewEvent:(MDEvent *)event{
     DEBUGLOG(@"New event added to events list");
     [event print];
     [self.programmedEvents addObject:event];
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateProgrammed" object:self.programmedEvents];
 }
 
 - (void)removeEvent:(NSNotification *)notification{
-    for (MDEvent *event in self.programmedEvents) {
-        if ([event.name isEqualToString:notification.object]) {
-            [self.programmedEvents removeObject:event];
-            [self.tableView reloadData];
-        }
-    }
+    [self.programmedEvents removeObject:notification.object];
+    [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateProgrammed" object:self.programmedEvents];
 }
 
 - (void)sortEventsByDueDate{
@@ -183,6 +196,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"events size: %d", self.programmedEvents.count);
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
 }
 
 @end

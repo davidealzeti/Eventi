@@ -29,17 +29,6 @@
     
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (void)setupLabels{
     self.nameLabel.text = self.programmedEvent.name;
     self.categoryLabel.text = self.programmedEvent.category;
@@ -56,9 +45,18 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"sendingPastEvent" object:self.programmedEvent];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"removingProgrammedEvent" object:self.programmedEvent.name];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"removingProgrammedEvent" object:self.programmedEvent];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)deleteEvent:(id)sender {
+    DEBUGLOG(@"Button pressed: delete programmed event");
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"removingProgrammedEvent" object:self.programmedEvent];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end

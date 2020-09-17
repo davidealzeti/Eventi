@@ -7,10 +7,14 @@
 //
 
 #import "MDPastEventTableViewController.h"
+#import "MDPastEventViewController.h"
+#import "MDFileManager.h"
 #define DEBUGLOG(a) NSLog(@"%s: %@", __FUNCTION__, a)
 #define SECTIONS_NUM 1
 
 @interface MDPastEventTableViewController ()
+
+@property (strong, nonatomic) MDFileManager *fm;
 
 @end
 
@@ -27,9 +31,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.pastEvents = [[NSMutableArray alloc] init];
+    self.fm = [[MDFileManager alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPastEvent:) name:@"sendingPastEvent" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEvent:) name:@"removingPastEvent" object:nil];
+    
+    [self loadPastEvent];
 }
 
 
@@ -106,8 +114,23 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showPastEventSegue"]){
+        
+        DEBUGLOG(@"Show past event segue");
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        MDPastEventViewController *vc = segue.destinationViewController;
+        if ([self.pastEvents[indexPath.row] isKindOfClass:[MDEvent class]]) {
+            vc.pastEvent = (MDEvent *)self.pastEvents[indexPath.row];
+        }
+    }
+}
+
+- (void)loadPastEvent{
+    self.pastEvents = [[NSMutableArray alloc] initWithArray:[self.fm loadPastEvents]];
+    
+    [self.tableView reloadData];
 }
 
 
@@ -119,11 +142,23 @@
         [event print];
         [self.pastEvents addObject:event];
         [self.tableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updatePast" object:self.pastEvents];
     }
+}
+
+- (void)removeEvent:(NSNotification *)notification{
+    [self.pastEvents removeObject:notification.object];
+    [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updatePast" object:self.pastEvents];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"past events size: %d", self.pastEvents.count);
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
 }
 
 @end

@@ -22,6 +22,8 @@
 		E272A6652512408A0097ACDF /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E272A6642512408A0097ACDF /* CustomTableViewCell.m */; };
 		E2C6CC08250D172100498601 /* logo_size_invert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2C6CC07250D172100498601 /* logo_size_invert.jpg */; };
 		E2C6CC0B250D1D3100498601 /* MDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6CC0A250D1D3100498601 /* MDEvent.m */; };
+		E2D22FA425136A57003DCB61 /* MDFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D22FA325136A57003DCB61 /* MDFileManager.m */; };
+		E2D22FA82513C21B003DCB61 /* MDPastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D22FA72513C21B003DCB61 /* MDPastEventViewController.m */; };
 		E2DE1861250F6A62001D13B2 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DE1860250F6A62001D13B2 /* CreateEventViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,10 @@
 		E2C6CC07250D172100498601 /* logo_size_invert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo_size_invert.jpg; path = ../../../../Downloads/LogoSize_Apple_icon_ByTailorBrands/logo_size_invert.jpg; sourceTree = "<group>"; };
 		E2C6CC09250D1D3100498601 /* MDEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDEvent.h; path = Model/MDEvent.h; sourceTree = "<group>"; };
 		E2C6CC0A250D1D3100498601 /* MDEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDEvent.m; path = Model/MDEvent.m; sourceTree = "<group>"; };
+		E2D22FA225136A57003DCB61 /* MDFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDFileManager.h; path = Persistence/MDFileManager.h; sourceTree = "<group>"; };
+		E2D22FA325136A57003DCB61 /* MDFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDFileManager.m; path = Persistence/MDFileManager.m; sourceTree = "<group>"; };
+		E2D22FA62513C21B003DCB61 /* MDPastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDPastEventViewController.h; path = ViewControllers/MDPastEventViewController.h; sourceTree = "<group>"; };
+		E2D22FA72513C21B003DCB61 /* MDPastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDPastEventViewController.m; path = ViewControllers/MDPastEventViewController.m; sourceTree = "<group>"; };
 		E2DE185F250F6A62001D13B2 /* CreateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateEventViewController.h; path = ViewControllers/CreateEventViewController.h; sourceTree = "<group>"; };
 		E2DE1860250F6A62001D13B2 /* CreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateEventViewController.m; path = ViewControllers/CreateEventViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +114,8 @@
 				E217BA74250E58CF003FC61E /* MDProgrammedEventTableViewController.m */,
 				E2DE185F250F6A62001D13B2 /* CreateEventViewController.h */,
 				E2DE1860250F6A62001D13B2 /* CreateEventViewController.m */,
+				E2D22FA62513C21B003DCB61 /* MDPastEventViewController.h */,
+				E2D22FA72513C21B003DCB61 /* MDPastEventViewController.m */,
 				E20D0D2225111F15006384A2 /* MDProgrammedEventViewController.h */,
 				E20D0D2325111F15006384A2 /* MDProgrammedEventViewController.m */,
 			);
@@ -137,14 +145,15 @@
 		E24CF291250BDA2000AC6608 /* Eventi */ = {
 			isa = PBXGroup;
 			children = (
-				E272A662251240430097ACDF /* Styling */,
-				E2C6CC0C250D1D5000498601 /* Model */,
 				E24CF295250BDA2000AC6608 /* AppDelegate.h */,
 				E24CF296250BDA2000AC6608 /* AppDelegate.m */,
 				E24CF29B250BDA2000AC6608 /* Main.storyboard */,
-				E217BA76250E5928003FC61E /* VIewControllers */,
 				E24CF2A0250BDA2100AC6608 /* LaunchScreen.storyboard */,
 				E24CF2A3250BDA2100AC6608 /* Info.plist */,
+				E272A662251240430097ACDF /* Styling */,
+				E2C6CC0C250D1D5000498601 /* Model */,
+				E217BA76250E5928003FC61E /* VIewControllers */,
+				E2D22FA525136A64003DCB61 /* Persistence */,
 				E24CF292250BDA2000AC6608 /* Supporting Files */,
 			);
 			path = Eventi;
@@ -196,6 +205,15 @@
 				E2C6CC0A250D1D3100498601 /* MDEvent.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E2D22FA525136A64003DCB61 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				E2D22FA225136A57003DCB61 /* MDFileManager.h */,
+				E2D22FA325136A57003DCB61 /* MDFileManager.m */,
+			);
+			name = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,11 +349,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D22FA82513C21B003DCB61 /* MDPastEventViewController.m in Sources */,
 				E217BA75250E58CF003FC61E /* MDProgrammedEventTableViewController.m in Sources */,
 				E2DE1861250F6A62001D13B2 /* CreateEventViewController.m in Sources */,
 				E24CF297250BDA2000AC6608 /* AppDelegate.m in Sources */,
 				E24CF294250BDA2000AC6608 /* main.m in Sources */,
 				E217BA87250E7633003FC61E /* MDPastEventTableViewController.m in Sources */,
+				E2D22FA425136A57003DCB61 /* MDFileManager.m in Sources */,
 				E2C6CC0B250D1D3100498601 /* MDEvent.m in Sources */,
 				E272A6652512408A0097ACDF /* CustomTableViewCell.m in Sources */,
 				E20D0D2425111F15006384A2 /* MDProgrammedEventViewController.m in Sources */,
