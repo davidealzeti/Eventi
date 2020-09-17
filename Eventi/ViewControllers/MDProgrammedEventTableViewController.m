@@ -163,7 +163,10 @@
         if ([event1.dueDate compare:event2.dueDate]) {
             return (NSComparisonResult)NSOrderedDescending;
         }
-        else return (NSComparisonResult)NSOrderedAscending;
+        else if ([event2.dueDate compare:event1.dueDate]){
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        else return (NSComparisonResult)NSOrderedSame;
     }];
     
     [self.tableView reloadData];
@@ -174,7 +177,10 @@
         if ([event1.creationDate compare:event2.creationDate]) {
             return (NSComparisonResult)NSOrderedDescending;
         }
-        else return (NSComparisonResult)NSOrderedAscending;
+        else if ([event2.creationDate compare:event1.creationDate]){
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        else return (NSComparisonResult)NSOrderedSame;
     }];
     
     [self.tableView reloadData];
@@ -198,7 +204,27 @@
     NSLog(@"events size: %d", self.programmedEvents.count);
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
+- (IBAction)showSortAlert:(id)sender {
+    UIAlertController *alert =  [UIAlertController alertControllerWithTitle:@"Ordina Eventi" message:@"Ordina i tuoi eventi in base alle informazioni che preferisci" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sortByDueDate = [UIAlertAction actionWithTitle:@"Scadenza" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        [self sortEventsByDueDate];
+    }];
+    
+    UIAlertAction *sortByCreationDate = [UIAlertAction actionWithTitle:@"Creazione" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        [self sortEventsByCreationDate];
+    }];
+    
+    UIAlertAction *sortByCategory = [UIAlertAction actionWithTitle:@"Categoria" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        [self sortEventsByCategory];
+    }];
+    
+    [alert addAction:sortByDueDate];
+    [alert addAction:sortByCreationDate];
+    [alert addAction:sortByCategory];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
+
 
 @end
